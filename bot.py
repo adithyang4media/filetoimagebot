@@ -123,7 +123,7 @@ def imgup(update, context):
    return ConversationHandler.END
 
 
-def text(update, context)
+def text(update, context):
     global filesname
     if "http" in mes: 
          def is_downloadable(url):
