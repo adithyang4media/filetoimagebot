@@ -150,7 +150,7 @@ def text(update, context):
                update.message.reply_text("Please enter a file name with extension")
                return TXT
               
-def urlup(update, context)
+def urlup(update, context):
     mes = update.message.text
     context.bot.sendDocument(chat_id=update.effective_chat.id, document=open(filesname, 'rb'), filename=mes)
     os.remove(filesname)
