@@ -34,7 +34,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-GENDER, NAMER, VOICE, IMG = range(4)
+TXT, NAMER, VOICE, IMG = range(4)
 
 
 # Define a few command handlers. These usually take the two arguments update and
