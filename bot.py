@@ -195,7 +195,7 @@ def main():
         entry_points=[MessageHandler(Filters.photo, photo_handler)],
         states={
             
-            TXT: [MessageHandler(Filters.text, imgup)]
+            IMG: [MessageHandler(Filters.text, imgup)]
             
         },
         fallbacks=[MessageHandler(Filters.command, cancel)],
@@ -204,7 +204,7 @@ def main():
    dp.add_handler(conc_handler)
   
    text_handler = ConversationHandler(
-        entry_points=[MessageHandler(Filters.photo, photo_handler)],
+        entry_points=[MessageHandler(Filters.text, text)],
         states={
             
             TXT: [MessageHandler(Filters.text, urlup)]
