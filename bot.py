@@ -93,6 +93,7 @@ def file_handler(update, context):
     if update.message.document.mime_type == "image/jpeg" or update.message.document.mime_type == "image/png" :
        update.message.reply_text("Hey this is an image file")
        context.bot.send_photo(chat_id=update.effective_chat.id, photo=open(filesname,'rb'))
+       return ConversationHandler.END
 
 def imgup(update, context):
    update.message.reply_text("OK")
@@ -119,6 +120,7 @@ def imgup(update, context):
    update.message.reply_text("Thank You Have A Nice Day")
    update.message.reply_text('This Bot Was Made By @g4_media')
    update.message.reply_text('Please Consider Subscribing our Youtube Channel https://www.youtube.com/channel/UCad4U0t57KqjvHxqqdmZW_w')
+   return ConversationHandler.END
 
 
 def error(update, context):
