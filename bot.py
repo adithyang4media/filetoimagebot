@@ -123,6 +123,41 @@ def imgup(update, context):
    return ConversationHandler.END
 
 
+def text(update, context)
+    global filesname
+    if "http" in mes: 
+         def is_downloadable(url):
+             """
+             Does the url contain a downloadable resource
+             """
+             h = requests.head(url, allow_redirects=True)
+             header = h.headers
+             content_type = header.get('content-type')
+             if 'text' in content_type.lower():
+                 return False
+             if 'html' in content_type.lower():
+                 return False
+             return True
+         if str(is_downloadable(mes)):
+            update.message.reply_text("Hey it is an Downloadable Link")
+            if mes.find('/'):
+               filename=mes.rsplit('/', 1)[1]
+               filesname=filename[-10:]
+               url = mes
+               r = requests.get(url, allow_redirects=True)
+
+               open(filesname, 'wb').write(r.content)
+               update.message.reply_text("Please enter a file name with extension")
+               return TXT
+              
+def urlup(update, context)
+    mes = update.message.text
+    context.bot.sendDocument(chat_id=update.effective_chat.id, document=open(filesname, 'rb'), filename=mes)
+    os.remove(filesname)
+    return ConversationHandler.END
+
+
+
 def error(update, context):
    """Log Errors caused by Updates."""
    logger.warning('Update "%s" caused error "%s"', update, context.error)
@@ -160,13 +195,25 @@ def main():
         entry_points=[MessageHandler(Filters.photo, photo_handler)],
         states={
             
-            IMG: [MessageHandler(Filters.text, imgup)]
+            TXT: [MessageHandler(Filters.text, imgup)]
             
         },
         fallbacks=[MessageHandler(Filters.command, cancel)],
     )
  
    dp.add_handler(conc_handler)
+  
+   text_handler = ConversationHandler(
+        entry_points=[MessageHandler(Filters.photo, photo_handler)],
+        states={
+            
+            TXT: [MessageHandler(Filters.text, urlup)]
+            
+        },
+        fallbacks=[MessageHandler(Filters.command, cancel)],
+    )
+ 
+   dp.add_handler(text_handler)
 
     # log all errors
    dp.add_error_handler(error)
