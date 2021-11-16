@@ -124,6 +124,7 @@ def imgup(update, context):
 
 
 def text(update, context):
+    mes=update.message.text
     global filesname
     if "http" in mes: 
          def is_downloadable(url):
